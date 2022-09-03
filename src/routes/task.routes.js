@@ -15,15 +15,15 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { title, description } = req.body;
-  const task = new Task({ title, description });
+  const { title, description, fecha } = req.body;
+  const task = new Task({ title, description, fecha });
   await task.save();
   res.json({ status: "tarea guardada" });
 });
 
 router.put("/:id", async (req, res) => {
-  const { title, description } = req.body;
-  const newTask = { title, description };
+  const { title, description,fecha } = req.body;
+  const newTask = { title, description, fecha };
   await Task.findByIdAndUpdate(req.params.id, newTask)
   res.json({ status: "tarea editada" });
 });
