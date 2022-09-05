@@ -5,11 +5,23 @@ import { AddTask } from "./components/AddTask";
 
 export const App = () => {
   const [mensaje, setMensaje] = useState({ status: "", mensaje: "" });
+
+  const currentDate = new Date();
+
   const initialValues = {
     _id: "",
     title: "",
     description: "",
-    fecha: "",
+    fecha:
+      currentDate.getFullYear() +
+      (currentDate.getMonth() < 10 ? "-0" : "-") +
+      (currentDate.getMonth() + 1) +
+      (currentDate.getDate() < 10 ? "-0" : "-") +
+      currentDate.getDate() +
+      (currentDate.getHours() < 10 ? "T0" : "T") +
+      currentDate.getHours() +
+      (currentDate.getMinutes() < 10 ? ":0" : ":") +
+      currentDate.getMinutes(),
   };
   const [tarea, setTarea] = useState(initialValues);
   const [taskList, setTaskList] = useState([]);
@@ -106,6 +118,10 @@ export const App = () => {
     }
   };
 
+  const limpiar = () => {
+    setTarea(initialValues);
+  };
+
   useEffect(() => {
     obtenerTareas();
   }, []);
@@ -122,6 +138,7 @@ export const App = () => {
         setTarea={setTarea}
         agregarTarea={agregarTarea}
         editarTareaXId={editarTareaXId}
+        limpiar={limpiar}
       />
       <Box>
         <ShowTask

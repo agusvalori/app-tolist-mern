@@ -18,6 +18,9 @@ export const ShowTask = ({ taskList, eliminarTareaXId, preEditarTareaXId }) => {
     >
       {Array.isArray(taskList) && taskList.length != 0 ? (
         taskList.map((tareas) => {
+          let date = new Date(tareas.fecha);
+         
+
           return (
             <Paper
               sx={{
@@ -29,9 +32,11 @@ export const ShowTask = ({ taskList, eliminarTareaXId, preEditarTareaXId }) => {
               key={tareas._id}
             >
               <Box sx={{ width: "90%", textAlign: "center" }}>
-                <Typography>{tareas.title}</Typography>
+                <Typography variant='h6' color='primary' >{tareas.title}</Typography>
                 <Typography>{tareas.description}</Typography>
-                <Typography>{tareas.fecha}</Typography>
+                <Typography fontSize={'small'} color='error' >
+                  {date!="Invalid Date"&&date.toLocaleString()}
+                </Typography>
               </Box>
               <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <IconButton onClick={() => eliminarTareaXId(tareas._id)}>

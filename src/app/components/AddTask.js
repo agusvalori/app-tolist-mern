@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { Box, TextField, Paper, Button } from "@mui/material";
 
-export const AddTask = ({ setTarea, tarea, agregarTarea, editarTareaXId }) => {
+export const AddTask = ({
+  setTarea,
+  tarea,
+  agregarTarea,
+  editarTareaXId,
+  limpiar,
+}) => {
   const handleInputChange = (event) => {
     let { name, value } = event.target;
     setTarea({ ...tarea, [name]: value });
@@ -25,7 +31,13 @@ export const AddTask = ({ setTarea, tarea, agregarTarea, editarTareaXId }) => {
           margin: "10px",
         }}
       >
-        <Box sx={{ display: "flex", flexDirection: "row", justifyContent:'center' }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
           <TextField
             required
             name="title"
@@ -34,7 +46,7 @@ export const AddTask = ({ setTarea, tarea, agregarTarea, editarTareaXId }) => {
             onChange={(event) => handleInputChange(event)}
           />
           <TextField
-          sx={{margin:'0px 5px'}}
+            sx={{ margin: "0px 5px" }}
             required
             name="description"
             label="Descripcion"
@@ -42,10 +54,9 @@ export const AddTask = ({ setTarea, tarea, agregarTarea, editarTareaXId }) => {
             onChange={(event) => handleInputChange(event)}
           />
           <TextField
-          
             required
             name="fecha"
-            label="Fecha"
+            type="datetime-local"
             value={tarea.fecha}
             onChange={(event) => handleInputChange(event)}
           />
@@ -59,12 +70,7 @@ export const AddTask = ({ setTarea, tarea, agregarTarea, editarTareaXId }) => {
               sx={{ margin: "0px 10px" }}
               variant="outlined"
               color="success"
-              onClick={()=>setTarea({
-                _id: "",
-                title: "",
-                description: "",
-                fecha: "",
-              })}
+              onClick={() => limpiar()}
             >
               Limpiar
             </Button>
